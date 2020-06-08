@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Page from './Page';
 
 function ViewSinglePost() {
 	return (
-		<Page title="">
+		<Page title="Fake Hardcoded Title">
 			<div className="d-flex justify-content-between">
 				<h2>Example Post Title</h2>
 				<span className="pt-2">

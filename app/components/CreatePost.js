@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Page from './Page';
 import Axios from 'axios';
 import { withRouter } from 'react-router-dom';
+import DispatchContext from '../DispatchContext';
 
 function CreatePost(props) {
 	const [title, setTitle] = useState();
 	const [body, setBody] = useState();
+	const appDispatch = useContext(DispatchContext);
 
 	async function handleSubmit(e) {
 		e.preventDefault();
@@ -17,7 +19,10 @@ function CreatePost(props) {
 				token: localStorage.getItem('complexappToken'),
 			});
 			// Redirect to new post url
-			props.addFlashMessage('Congrats, you successfully created a post.');
+			appDispatch({
+				type: 'flashMessage',
+				value: 'Congrats, you successfully created a post.',
+			});
 			props.history.push(`/post/${response.data}`);
 		} catch (e) {
 			console.log('There was a problem.');
