@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import Page from './Page';
+import LoadingDotsIcon from './LoadingDotsIcon';
 import Axios from 'axios';
 import { useParams, Link } from 'react-router-dom';
+import ReactMarkdown from 'react-markdown';
 
 function ViewSinglePost() {
 	const { id } = useParams();
@@ -9,9 +11,13 @@ function ViewSinglePost() {
 	const [post, setPost] = useState();
 
 	useEffect(() => {
+		const ourRequest = Axios.CancelToken.source();
+
 		async function fetchPost() {
 			try {
-				const response = await Axios.get(`/post/${id}`);
+				const response = await Axios.get(`/post/${id}`, {
+					cancelToken: ourRequest.token,
+				});
 				setPost(response.data);
 				setIsLoading(false);
 			} catch (e) {
@@ -19,12 +25,15 @@ function ViewSinglePost() {
 			}
 		}
 		fetchPost();
+		return () => {
+			ourRequest.cancel();
+		};
 	}, []);
 
 	if (isLoading) {
 		return (
 			<Page title="">
-				<div>Loading...</div>
+				<LoadingDotsIcon />
 			</Page>
 		);
 	}
@@ -59,7 +68,20 @@ function ViewSinglePost() {
 				on {dateFormatted}
 			</p>
 
-			<div className="body-content">{post.body}</div>
+			<div className="body-content">
+				<ReactMarkdown
+					source={post.body}
+					allowedTypes={[
+						'paragraph',
+						'strong',
+						'emphasis',
+						'text',
+						'heading',
+						'list',
+						'listItem',
+					]}
+				/>
+			</div>
 		</Page>
 	);
 }
