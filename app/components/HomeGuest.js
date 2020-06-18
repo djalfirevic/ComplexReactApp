@@ -9,21 +9,16 @@ function HomeGuest() {
 
 	async function handleSubmit(e) {
 		e.preventDefault();
-
 		try {
-			await Axios.post('/register', {
-				username,
-				email,
-				password,
-			});
+			await Axios.post('/register', { username, email, password });
 			console.log('User was successfully created.');
-		} catch (error) {
-			console.error('There was an error.');
+		} catch (e) {
+			console.log('There was an error.');
 		}
 	}
 
 	return (
-		<Page title="Welcome" wide={true}>
+		<Page title="Welcome!" wide={true}>
 			<div className="row align-items-center">
 				<div className="col-lg-7 py-3 py-md-5">
 					<h1 className="display-3">Remember Writing?</h1>
