@@ -24,7 +24,9 @@ function Chat() {
 	}, [appState.isChatOpen]);
 
 	useEffect(() => {
-		socket.current = io(process.env.BACKENDURL || '');
+		socket.current = io(
+			process.env.BACKENDURL || 'https://djalfirevic-backend.herokuapp.com'
+		);
 
 		socket.current.on('chatFromServer', (message) => {
 			setState((draft) => {
