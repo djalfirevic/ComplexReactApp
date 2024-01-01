@@ -14,8 +14,8 @@ const io = require("socket.io")(server, {
   cors: true
 })
 
-io.on("connection", function(socket) {
-  socket.on("chatFromBrowser", function(data) {
+io.on("connection", function (socket) {
+  socket.on("chatFromBrowser", function (data) {
     try {
       let user = jwt.verify(data.token, process.env.JWTSECRET)
       socket.broadcast.emit("chatFromServer", { message: sanitizeHTML(data.message, { allowedTags: [], allowedAttributes: {} }), username: user.username, avatar: user.avatar })

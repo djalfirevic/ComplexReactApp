@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react"
+import React, { useContext } from "react"
 import { Link } from "react-router-dom"
 import DispatchContext from "../DispatchContext"
 import StateContext from "../StateContext"

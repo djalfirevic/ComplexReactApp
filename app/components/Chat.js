@@ -13,7 +13,7 @@ function Chat() {
   const appDispatch = useContext(DispatchContext)
   const [state, setState] = useImmer({
     fieldValue: "",
-    chatMessages: [],
+    chatMessages: []
   })
 
   useEffect(() => {
@@ -26,8 +26,8 @@ function Chat() {
   useEffect(() => {
     socket.current = io(process.env.BACKENDURL || "your heroku dot com goes here")
 
-    socket.current.on("chatFromServer", (message) => {
-      setState((draft) => {
+    socket.current.on("chatFromServer", message => {
+      setState(draft => {
         draft.chatMessages.push(message)
       })
     })
@@ -44,7 +44,7 @@ function Chat() {
 
   function handleFieldChange(e) {
     const value = e.target.value
-    setState((draft) => {
+    setState(draft => {
       draft.fieldValue = value
     })
   }
@@ -54,7 +54,7 @@ function Chat() {
     // Send message to chat server
     socket.current.emit("chatFromBrowser", { message: state.fieldValue, token: appState.user.token })
 
-    setState((draft) => {
+    setState(draft => {
       // Add message to state collection of messages
       draft.chatMessages.push({ message: draft.fieldValue, username: appState.user.username, avatar: appState.user.avatar })
       draft.fieldValue = ""
