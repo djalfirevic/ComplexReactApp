@@ -83,15 +83,12 @@ body {
 .input-dark::-webkit-input-placeholder {
   color: #888;
 }
-
 .input-dark::-moz-placeholder {
   color: #888;
 }
-
 .input-dark:-ms-input-placeholder {
   color: #888;
 }
-
 .input-dark:-moz-placeholder {
   color: #888;
 }
@@ -238,11 +235,13 @@ textarea.tall-textarea {
   opacity: 0;
   transition: all 0.3s ease-out;
   transform: scale(1.07);
+  visibility: hidden;
 }
 
 .live-search-results--visible {
   opacity: 1;
   transform: scale(1);
+  visibility: visible;
 }
 
 .search-overlay-top {
@@ -294,7 +293,6 @@ textarea.tall-textarea {
     transform: rotate(360deg);
   }
 }
-
 @keyframes spin {
   100% {
     -webkit-transform: rotate(360deg);
@@ -565,7 +563,6 @@ textarea.tall-textarea {
 }
 
 @keyframes opacitychange {
-
   0%,
   100% {
     opacity: 0;
@@ -577,7 +574,6 @@ textarea.tall-textarea {
 }
 
 @-webkit-keyframes opacitychange {
-
   0%,
   100% {
     opacity: 0;
